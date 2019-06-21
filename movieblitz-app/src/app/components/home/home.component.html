@@ -1,3 +1,24 @@
-<p>
+<p (click)="fetchLatesMovies()">
   home works!
 </p>
+
+
+<owl-carousel-o [options]="customOptions">
+ 
+  <ng-container *ngFor="let slide of trndingMovies">
+    <ng-template carouselSlide [id]="slide.id">
+      <img [src]="baseUrl + slide.backdrop_path" [alt]="slide.alt" [title]="slide.title">
+      <p>{{slide.title}}</p>
+    <div *ngFor="let genre of slide.genre_ids ">
+      <span>{{customGenereObj[genre]}}</span>
+    </div>  
+    <app-rating [rating]='2' [itemId]='slide.id*2' (ratingClick)='ratingComponentClick($event)'></app-rating>
+    <a [routerLink]="['/detail', slide.id]">Show more</a>
+    <i class="fas fa-heart"></i>
+    </ng-template>
+  </ng-container>
+
+</owl-carousel-o>
+
+<!-- <app-rating [rating]='3' [itemId]='111' (ratingClick)='ratingComponentClick($event)'></app-rating> -->
+
